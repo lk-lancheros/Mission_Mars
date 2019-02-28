@@ -45,28 +45,23 @@ def scrape_info():
     html = browser.html
     # Create BeautifulSoup object; parse with 'html.parser'
     soup3 = BeautifulSoup(html, 'html.parser')
-    temp=soup3.find_all('p', class_='TweetTextSize TweetTextSize--normal js-tweet-text tweet-text')[0].text
+    temp = soup3.find('div', class_='js-tweet-text-container').find('p').text
     mars_weather=temp.split("pic")
+    mars_weather= mars_weather[0]
     
     # D. MARS FACTS
     # URL of page to be scraped
     url4= 'http://space-facts.com/mars/'
     # Use read_html function in Pandas to automatically scrape any tabular data from a page
     tables = pd.read_html(url4)
-    tables
-    # List dataframes for any tabular data
-    type(tables)
     df = tables[0]
     df.columns = ['Labels','Values']
-    df.head()
-    html_table = df.to_html()
-    html_table
-    df.to_html('table.html')
+    facts=df.to_dict()
     
     # E.MARS HEMISPHERES (TITLE AND IMAGE LINK)
     #URL of page to be scraped
     url5 = ['https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced',
-            'https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced',
+            'https://astrogeology   .usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced',
             'https://astrogeology.usgs.gov/search/map/Mars/Viking/schiaparelli_enhanced',
             'https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced']
 
@@ -89,7 +84,9 @@ def scrape_info():
         "news_title": news_title,
         "news_p": news_p,
         "jpl_image_url": jpl_image_url,
+        "mars_facts": facts,
         "mars_weather": mars_weather,
+        "title": title,
         "hemi_image_url": hemi_image_url
     }
 

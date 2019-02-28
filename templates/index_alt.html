@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mars</h1>
+      <p>News.Images.Facts.Weather.</p>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      <div class="row">               
+        <div class="col-md-12">
+          <h3>Latest Mars News</h3>
+          <h6>{{ mars.news_title }}<h6>
+          </div>
+      </div>
+    </div>  
+</body>
+</html>
+          <!-- <p>{{ mars.news_p }}</p>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Featured Mars Image:</h2>
+          <img src={{mars.jpl_image_url}} alt="Featured mars image">
+          </div>
+        <div class="col-md-4">
+          <h3>Current Weather on Mars</h3>
+          <p>{{ mars.mars_weather }}</p>
+          <br>
+          <h2>Mars Facts</h2> -->
+          <!-- {{mars.html_table|safe}}
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>{{mars.title[0]}}</h2>
+          <img src= {{mars.hemi_image_url[0]}} alt="Hemisphere">
+          </div>
+        <div class="col-md-6">
+          <h2>{{mars.title[1]}}</h2>
+          <img src= {{mars.hemi_image_url[1]}} alt="Hemisphere">
+          </div> 
+        </div> 
+      <div class="row">
+          <div class="col-md-6">
+              <h2>{{mars.title[2]}}</h2>
+              <img src= {{mars.hemi_image_url[2]}} alt="Hemisphere">
+          </div>
+          <div class="col-md-6">
+              <h2> {{mars.title[3]}}</h2>
+              <img src= {{mars.hemi_image_url[3]}} alt="Hemisphere">  
+            </div>
+        </div>
+    </body>
+</html>
