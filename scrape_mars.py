@@ -48,24 +48,15 @@ def scrape_info():
     temp = soup3.find('div', class_='js-tweet-text-container').find('p').text
     mars_weather=temp.split("pic")
     mars_weather= mars_weather[0]
-    
-    # D. MARS FACTS
+       
+    #E.MARS HEMISPHERES (TITLE AND IMAGE LINK)
     # URL of page to be scraped
-    url4= 'http://space-facts.com/mars/'
-    # Use read_html function in Pandas to automatically scrape any tabular data from a page
-    tables = pd.read_html(url4)
-    df = tables[0]
-    df.columns = ['Labels','Values']
-    facts=df.to_dict()
-    
-    # E.MARS HEMISPHERES (TITLE AND IMAGE LINK)
-    #URL of page to be scraped
     url5 = ['https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced',
-            'https://astrogeology   .usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced',
+            'https://astrogeology.usgs.gov/search/map/Mars/Viking/syrtis_major_enhanced',
             'https://astrogeology.usgs.gov/search/map/Mars/Viking/schiaparelli_enhanced',
             'https://astrogeology.usgs.gov/search/map/Mars/Viking/cerberus_enhanced']
 
-    hemi_image_url=[]
+    image_url=[]
     title=[]
 
     for u in url5:
@@ -75,19 +66,28 @@ def scrape_info():
         soup5=BeautifulSoup(html, 'html.parser')
         #Find the link to enhanced image
         temp = soup5.find('div', class_='downloads')
-        hemi_image_url.append(temp.find('a')['href'])
+        image_url.append(temp.find('a')['href'])
         temp = soup5.find('div', class_='content')
         title.append(temp.find('h2').text)
 
+    # # D. MARS FACTS
+    # # URL of page to be scraped
+    # url4= 'http://space-facts.com/mars/'
+    # # Use read_html function in Pandas to automatically scrape any tabular data from a page
+    # tables = pd.read_html(url4)
+    # df = tables[0]
+    # df.columns = ['Labels','Values']
+    # facts=df.to_dict()
+    
     # Store data in a dictionary
     mars_data = {
         "news_title": news_title,
         "news_p": news_p,
         "jpl_image_url": jpl_image_url,
-        "mars_facts": facts,
         "mars_weather": mars_weather,
         "title": title,
-        "hemi_image_url": hemi_image_url
+        "hemi_image_url": image_url
+        # "mars_facts": facts,
     }
 
     print(mars_data)  
