@@ -49,6 +49,18 @@ def scrape_info():
     mars_weather=temp.split("pic")
     mars_weather= mars_weather[0]
        
+    # D. MARS FACTS
+    # URL of page to be scraped
+    url4= 'http://space-facts.com/mars/'
+    # Use read_html function in Pandas to automatically scrape any tabular data from a page
+    tables = pd.read_html(url4)
+    df = tables[0]
+    # Reformat df into html string
+    df.set_index(0, inplace=True)
+    df.index.names= [None]
+    df.columns= ['']
+    df_html=df.to_html()
+    
     #E.MARS HEMISPHERES (TITLE AND IMAGE LINK)
     # URL of page to be scraped
     url5 = ['https://astrogeology.usgs.gov/search/map/Mars/Viking/valles_marineris_enhanced',
@@ -70,15 +82,6 @@ def scrape_info():
         temp = soup5.find('div', class_='content')
         title.append(temp.find('h2').text)
 
-    # # D. MARS FACTS
-    # # URL of page to be scraped
-    # url4= 'http://space-facts.com/mars/'
-    # # Use read_html function in Pandas to automatically scrape any tabular data from a page
-    # tables = pd.read_html(url4)
-    # df = tables[0]
-    # df.columns = ['Labels','Values']
-    # facts=df.to_dict()
-    
     # Store data in a dictionary
     mars_data = {
         "news_title": news_title,
@@ -86,8 +89,8 @@ def scrape_info():
         "jpl_image_url": jpl_image_url,
         "mars_weather": mars_weather,
         "title": title,
-        "hemi_image_url": image_url
-        # "mars_facts": facts,
+        "hemi_image_url": image_url,
+        "mars_facts": df_html
     }
 
     print(mars_data)  
@@ -97,3 +100,4 @@ def scrape_info():
 
     # Return results
     return mars_data
+
